@@ -377,3 +377,14 @@
          font-size: 14px;
      }
  }
+
+ @media (max-width: 600px) {
+    .storyboard-box {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .move-controls {
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -4,6 +4,17 @@ const focalColors = ['#FF595E', '#FF924C', '#FFCA3A', '#8AC926', '#1982C4', '#6A
 let boxCounter = 1;
 
 // ⥥ ---------- STORYBOARD CASES ---------- ⥥ 
+
+
+function getUniqueTitle(baseTitle) {
+    let title = baseTitle;
+    let counter = 1;
+    while (document.querySelector(`input[value="${title}"]`)) {
+        title = `${baseTitle}_${counter}`;
+        counter++;
+    }
+    return title;
+}
 // ⥥ ---------- ! A OUVRIR ! ---------- ⥥ 
 function addStoryboardBox() {
     const container = document.getElementById('storyboardContainer');
@@ -93,6 +104,7 @@ function addStoryboardBox() {
     container.appendChild(box);
     boxCounter++;
 }
+
 
 // ----------⥥ FONCTION DUREE DES PLANS ⥥----------
 
