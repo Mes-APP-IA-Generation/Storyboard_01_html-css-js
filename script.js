@@ -124,21 +124,24 @@ function updateDuration(input) {
 
 // Fonction pour calculer et mettre à jour la durée totale
 function calculateTotalDuration() {
-    const boxes = document.querySelectorAll('.storyboard-box'); // Sélectionne toutes les boxes du storyboard
+    const boxes = document.querySelectorAll('.storyboard-box');
     let totalDuration = 0;
 
     boxes.forEach(box => {
-        const durationInput = box.querySelector('.duration-input'); // Trouver l'input de durée dans chaque box
+        const durationInput = box.querySelector('.duration-input');
         if (durationInput && durationInput.value) {
-            totalDuration += parseInt(durationInput.value, 10); // Ajouter la durée au total
+            totalDuration += parseInt(durationInput.value, 10);
         }
     });
 
-    const totalDurationDisplay = document.getElementById('totalDuration'); // Récupérer l'élément d'affichage
+    const totalDurationDisplay = document.getElementById('totalDuration');
     if (totalDurationDisplay) {
-        totalDurationDisplay.textContent = `Durée totale du storyboard: ${totalDuration} secondes`; // Mettre à jour le texte
+        totalDurationDisplay.textContent = `Durée totale du storyboard: ${totalDuration} secondes`;
+        totalDurationDisplay.classList.add('fade-in');
+        setTimeout(() => totalDurationDisplay.classList.remove('fade-in'), 500);
     }
 }
+
 
 // Fonction pour mettre à jour la durée du plan
 function updateDuration(input) {
@@ -231,9 +234,15 @@ function moveBox(button, direction) {
     }
 }
 
+  /* ⥥ FONCTION SUPLEMENTAIRE ⥥ */
 function deleteBox(button) {
     const box = button.closest('.storyboard-box');
-    box.remove();
-    calculateTotalDuration(); // Recalcule la durée totale après suppression
+    box.classList.add('fade-out');
+    setTimeout(() => {
+        box.remove();
+        calculateTotalDuration(); // Recalcule la durée totale après suppression
+    }, 500);
 }
+
+  /*  FONCTION SUPLEMENTAIRE  */
 

@@ -10,3 +10,6 @@ Ajouter une fonction pour dupliquer une case afin de gagner du temps lorsqu'on s
 
 15. Mode plein écran pour une vue d'ensemble
 Ajouter une option permettant de passer en mode plein écran pour visualiser l’ensemble du storyboard, ce qui peut être utile lors de présentations ou de révisions de groupe.
+
+  /* ⥥ FONCTION SUPLEMENTAIRE ⥥ */
+  /*  FONCTION SUPLEMENTAIRE  */
