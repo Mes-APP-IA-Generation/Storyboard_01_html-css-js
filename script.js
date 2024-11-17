@@ -15,6 +15,7 @@ function getUniqueTitle(baseTitle) {
     }
     return title;
 }
+
 // ⥥ ---------- ! A OUVRIR ! ---------- ⥥ 
 function addStoryboardBox() {
     const container = document.getElementById('storyboardContainer');
@@ -29,7 +30,14 @@ function addStoryboardBox() {
 
             <div class="box-title">
             <input type="text" value="Plan_0${boxCounter}" onchange="updateBoxTitle(this)">
+
+                        <!-- Bouton de duplication -->
+            <button class="duplicate-box" onclick="duplicateBox(this)" style="background: #1cadeb; color: #000000; font-weight: bold;">Dupliquer</button>
+
             <button onclick="deleteBox(this)" style="background: #ff4444;">×</button>
+
+
+
         </div>
         <div class="image-container">
             <img style="display: none;">
@@ -234,7 +242,7 @@ function moveBox(button, direction) {
     }
 }
 
-  /* ⥥ FONCTION SUPLEMENTAIRE ⥥ */
+/* ⥥  DELETE BOX ⥥ */
 function deleteBox(button) {
     const box = button.closest('.storyboard-box');
     box.classList.add('fade-out');
@@ -244,5 +252,28 @@ function deleteBox(button) {
     }, 500);
 }
 
-  /*  FONCTION SUPLEMENTAIRE  */
+/* ⥥  DUPLICATION BOX ⥥ */
+function duplicateBox(button) {
+    const box = button.closest('.storyboard-box'); // Trouve la case parente
+    const container = document.getElementById('storyboardContainer'); // Trouve le conteneur des cases
+
+    // Créer une nouvelle case identique
+    const newBox = box.cloneNode(true); // cloneNode(true) pour cloner tous les éléments enfants
+
+    // Incrémenter le compteur de cases pour donner un titre unique à la nouvelle case
+    const newTitleInput = newBox.querySelector('input[type="text"]');
+    newTitleInput.value = getUniqueTitle(newTitleInput.value);
+
+    // Réinitialiser les champs si nécessaire (par exemple, effacer l'URL de l'image, etc.)
+    const newImageInput = newBox.querySelector('input[type="file"]');
+    newImageInput.value = ''; // Réinitialise le champ d'image
+
+    const newDescriptionTextarea = newBox.querySelector('textarea');
+    newDescriptionTextarea.value = ''; // Réinitialise la description
+
+    // Ajouter la nouvelle case au conteneur
+    container.appendChild(newBox);
+    boxCounter++; // Incrémenter le compteur pour le titre unique
+}
+
 

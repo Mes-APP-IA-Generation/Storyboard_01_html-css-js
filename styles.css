@@ -1,6 +1,3 @@
- 
- 
- 
  /* POLICE */
  @import url('https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400..700;1,400..700&family=Kanit:wght@100..900&family=Poppins&family=Roboto+Mono:ital,wght@0,100..700&family=Yatra+One&display=swap');
 
@@ -30,8 +27,51 @@
      background-color: var(--background-color);
      color: var(--text-color);
      padding: 20px;
+     position: relative;
+     /* Nécessaire pour positionner correctement le pseudo-élément */
+     height: 100vh;
+     /* S'assurer que le body prend toute la hauteur de la fenêtre */
+
  }
 
+
+ /* ⥥ ---------- LOGO BG ---------- ⥥ */
+
+ body {
+     position: relative;
+     /* Nécessaire pour placer un pseudo-élément */
+ }
+
+ /* Pseudo-élément ::before pour afficher le logo en arrière-plan */
+ body::before {
+     content: "";
+     position: absolute;
+     top: 63%;
+     /* Centré verticalement */
+     left: 50%;
+     /* Centré horizontalement */
+     transform: translate(-50%, -50%);
+     /* Centrage parfait */
+     background-image: url('/image/logo-bg.png');
+     /* Remplace par le chemin de ton logo */
+     background-repeat: no-repeat;
+     /* Empêche le logo de se répéter */
+     background-size: contain;
+     /* Ajuste la taille pour qu'elle s'adapte sans déformation */
+     width: 500px;
+     /* Taille du logo */
+     height: 500px;
+     /* Taille du logo */
+     opacity: 0.03;
+     pointer-events: none; /* Empêche toute interaction avec l'image du logo */
+
+ }
+
+ /* Optionnel : changer l'opacité lorsque la souris survole le logo */
+ body::before:hover {
+     opacity: 1;
+     /* Rendre l'image complètement visible au survol */
+ }
 
 
  /* HEADER "STORYBOARD-AHP" */
@@ -149,22 +189,26 @@
      /* Couleur de fond lors du survol */
  }
 
- /* ⥥ BOUTON "AJOUTER PLAN" ⥥ */
+ /* ⥥ BOUTONS ⥥ */
 
  button {
-     padding: 10px 20px;
+     padding: 5px 20px;
      border: none;
      border-radius: 5px;
      color: white;
      cursor: pointer;
      transition: opacity 0.3s;
      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+     transition: background-color 0.5s ease-in-out, transform 0.1s ease-in-out;
+     /* Transition plus longue et plus douce */
  }
 
  button:hover {
      opacity: 0.8;
      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+     transform: scale(1.02);
  }
+
 
 
  .add-btn {
@@ -295,24 +339,24 @@
 
  /* ⥥ DUREE PLAN ⥥ */
 
-  /* ⥥ FONCTION SUPLEMENTAIRE annimation compteur ⥥ */
+ /* ⥥ FONCTION SUPLEMENTAIRE annimation compteur ⥥ */
  .fade-in {
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
-}
+     opacity: 0;
+     animation: fadeIn 0.5s forwards;
+ }
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
+ @keyframes fadeIn {
+     to {
+         opacity: 1;
+     }
+ }
 
-.fade-out {
-    opacity: 0;
-    transition: opacity 0.5s;
-}
+ .fade-out {
+     opacity: 0;
+     transition: opacity 0.5s;
+ }
 
-  /*  FONCTION SUPLEMENTAIRE  */
+ /*  FONCTION SUPLEMENTAIRE  */
 
 
 
@@ -374,19 +418,23 @@
 
  /* ⥥ ---------- SCROLL BAR ---------- ⥥ */
 
-/* Styles pour la barre de défilement verticale */
-::-webkit-scrollbar {
-    width: var(--scroll-bar-largeur); /* Largeur de la barre de défilement */
-}
+ /* Styles pour la barre de défilement verticale */
+ ::-webkit-scrollbar {
+     width: var(--scroll-bar-largeur);
+     /* Largeur de la barre de défilement */
+ }
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--scroll-bar-front); /* Couleur de la pastille (partie mobile de la barre) */
-    border-radius: var(--scroll-bar-border); /* Raye */
-}
+ ::-webkit-scrollbar-thumb {
+     background-color: var(--scroll-bar-front);
+     /* Couleur de la pastille (partie mobile de la barre) */
+     border-radius: var(--scroll-bar-border);
+     /* Raye */
+ }
 
-::-webkit-scrollbar-track {
-    background-color: var(--scroll-bar-bk); /* Couleur de la piste (zone autour de la barre) */
-}
+ ::-webkit-scrollbar-track {
+     background-color: var(--scroll-bar-bk);
+     /* Couleur de la piste (zone autour de la barre) */
+ }
 
 
 
@@ -421,12 +469,13 @@
  }
 
  @media (max-width: 600px) {
-    .storyboard-box {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .move-controls {
-        display: flex;
-        justify-content: space-between;
-    }
-}
+     .storyboard-box {
+         width: 100%;
+         margin-bottom: 10px;
+     }
+
+     .move-controls {
+         display: flex;
+         justify-content: space-between;
+     }
+ }
