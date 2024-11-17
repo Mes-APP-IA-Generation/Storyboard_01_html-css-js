@@ -32,13 +32,25 @@ function addStoryboardBox() {
             <input type="text" value="Plan_0${boxCounter}" onchange="updateBoxTitle(this)">
 
                         <!-- Bouton de duplication -->
-            <button class="duplicate-box" onclick="duplicateBox(this)" style="background: #1cadeb; color: #000000; font-weight: bold;">Dupliquer</button>
+            <button class="duplicate-box" onclick="duplicateBox(this)" style="background: #1cadeb; color: #000000; font-weight: bold;">Dupliquer →</button>
 
-            <button onclick="deleteBox(this)" style="background: #ff4444;">×</button>
+                         <!-- SUPPRIME KES CASES -->
+            <button onclick="deleteBox(this)" style="background: #ff4444;">✗</button>
+            
 
 
+            </div>
 
-        </div>
+            <!-- AJOUTE UN TAG -->
+        <select id="tagSelect" onchange="addTag(this)">
+            <option value="">Sélectionner un tag...</option>
+            <option value="Extérieur">Extérieur</option>
+            <option value="Intérieur">Intérieur</option>
+            <option value="Studio">Studio</option>
+        </select>
+
+        
+        
         <div class="image-container">
             <img style="display: none;">
         </div>
@@ -112,6 +124,28 @@ function addStoryboardBox() {
     container.appendChild(box);
     boxCounter++;
 }
+
+
+
+
+// ----------⥥ FONCTION SUPPRIMER TOUT ⥥----------
+// Fonction pour supprimer toutes les cases du storyboard
+function deleteAllBoxes() {
+    const container = document.getElementById('storyboardContainer');
+    const boxes = container.querySelectorAll('.storyboard-box');
+
+    // Supprime chaque box une par une
+    boxes.forEach(box => {
+        box.classList.add('fade-out'); // Ajoute une animation de disparition si vous en avez une
+        setTimeout(() => {
+            box.remove(); // Supprime l'élément après l'animation
+        }, 500); // 500ms pour laisser le temps à l'animation de se jouer
+    });
+
+    // Recalculer la durée totale après suppression
+    calculateTotalDuration();
+}
+
 
 
 // ----------⥥ FONCTION DUREE DES PLANS ⥥----------
@@ -275,5 +309,6 @@ function duplicateBox(button) {
     container.appendChild(newBox);
     boxCounter++; // Incrémenter le compteur pour le titre unique
 }
+
 
 

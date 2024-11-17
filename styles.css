@@ -5,7 +5,7 @@
  /* ROOT  */
  :root {
      --background-color: #080a14;
-     --box-background: #080a14;
+     --box-background: #080a147c;
      --add-button: #7121bb;
      --text-color: #ffffff;
      /* ⥥ ---------- ROOT SCROLL BAR ---------- ⥥ */
@@ -63,7 +63,8 @@
      height: 500px;
      /* Taille du logo */
      opacity: 0.03;
-     pointer-events: none; /* Empêche toute interaction avec l'image du logo */
+     pointer-events: none;
+     /* Empêche toute interaction avec l'image du logo */
 
  }
 
@@ -97,6 +98,20 @@
      height: auto;
      /* Garder les proportions */
  }
+
+ /* TAGS */
+ .tag {
+     background-color: #8AC926;
+     color: white;
+     padding: 2px 8px;
+     margin-right: 5px;
+     border-radius: 12px;
+     font-size: 12px;
+     margin-top: 5px;
+     display: inline-block;
+ }
+
+
 
 
  /* Titre du Metrage et année... */
@@ -286,7 +301,7 @@
      padding: 5px;
      color: white;
      margin-bottom: 3px;
-     width: 50%;
+     width: 40%;
  }
 
  select:focus {
