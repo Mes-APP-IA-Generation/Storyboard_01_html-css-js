@@ -1,0 +1,12 @@
+Format d'image : Ajouter une option pour spécifier le format du plan, par exemple, 16:9, 4:3, Cinémascope, etc.
+Ajout de fichiers vidéo : Permettre d'ajouter des extraits vidéo ou des animations dans chaque case de storyboard pour avoir une meilleure idée de l'usage du plan.
+
+
+5. Ajout de liens vers des scènes ou des références externes
+Permettre d'ajouter des liens vers des scènes dans un script ou des vidéos de référence (YouTube, Vimeo, etc.) directement dans chaque case.
+
+8. Fonction de duplication des cases
+Ajouter une fonction pour dupliquer une case afin de gagner du temps lorsqu'on souhaite répéter un plan avec des modifications mineures (par exemple, la couleur de focale ou le type de caméra).
+
+15. Mode plein écran pour une vue d'ensemble
+Ajouter une option permettant de passer en mode plein écran pour visualiser l’ensemble du storyboard, ce qui peut être utile lors de présentations ou de révisions de groupe.
