@@ -56,7 +56,7 @@
      /* Centré horizontalement */
      transform: translate(-50%, -50%);
      /* Centrage parfait */
-     background-image: url('/image/Logozep0106.png');
+     background-image: url('./image/Logozep0106.png');
      /* Remplace par le chemin de ton logo */
      background-repeat: no-repeat;
      /* Empêche le logo de se répéter */
