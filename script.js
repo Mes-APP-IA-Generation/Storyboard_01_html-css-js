@@ -118,6 +118,7 @@ function generatePDF() {
     doc.save('storyboard.pdf');
 }
 
+// ⥥ ---------- FONCTION ADDSTORYBOARD  ---------- ⥥ 
 
 // ⥥ ---------- ! A OUVRIR ! ---------- ⥥ 
 function addStoryboardBox() {

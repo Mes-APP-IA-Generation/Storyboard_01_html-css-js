@@ -467,26 +467,31 @@
  /* ⥥ ---------- ICONE URL NOUVEL ONGLET ---------- ⥥ */
 
  /* L'input de l'URL */
-input[type="url"] {
-    width: 100%; /* L'input prend toute la largeur disponible */
-    padding-right: 30px; /* Ajoute un peu d'espace à droite pour l'icône */
-}
+ input[type="url"] {
+     width: 100%;
+     /* L'input prend toute la largeur disponible */
+     padding-right: 30px;
+     /* Ajoute un peu d'espace à droite pour l'icône */
+ }
 
-/* L'icône à droite */
-.open-link-icon {
-    position: absolute;
-    bottom: 40px;
-    right: 10px; /* Place l'icône à 10px du bord droit */
-    cursor: pointer;
-    font-size: 18px; /* Ajuste la taille de l'icône */
-    color: #77aac0; /* Couleur de l'icône */
-}
+ /* L'icône à droite */
+ .open-link-icon {
+     position: absolute;
+     bottom: 40px;
+     right: 10px;
+     /* Place l'icône à 10px du bord droit */
+     cursor: pointer;
+     font-size: 18px;
+     /* Ajuste la taille de l'icône */
+     color: #77aac0;
+     /* Couleur de l'icône */
+ }
 
-/* Changer la couleur au survol de l'icône */
-.open-link-icon:hover {
-    color: #ffffff;
-    transform: scale(1.09);
-}
+ /* Changer la couleur au survol de l'icône */
+ .open-link-icon:hover {
+     color: #ffffff;
+     transform: scale(1.09);
+ }
 
 
 
