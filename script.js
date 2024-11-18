@@ -29,16 +29,17 @@ function downloadJSON() {
     const boxes = document.querySelectorAll('.storyboard-box');
     const storyboardPlans = Array.from(boxes).map((box, index) => {
         return {
+
             planNumber: index + 1,
             title: box.querySelector('.box-title input').value || `Plan ${index + 1}`,
-            duration: box.querySelector('.duration-input')?.value || 'Non spécifiée',
-            description: box.querySelector('textarea')?.value || 'Aucune description',
+            tags: box.querySelector('#tagSelect')?.value || 'Aucun tag',
+            imageURL: box.querySelector('.image-container img')?.src || 'Aucune image',
             shotType: box.querySelector('.shot-type')?.value || 'Non spécifié',
             cameraType: box.querySelector('.camera-type')?.value || 'Non spécifié',
-            tags: box.querySelector('#tagSelect')?.value || 'Aucun tag',
             focal: box.querySelector('.focal-input')?.value || 'Non spécifié',
             videoReference: box.querySelector('.video-reference-container')?.textContent || 'Aucune vidéo',
-            imageURL: box.querySelector('.image-container img')?.src || 'Aucune image'
+            duration: box.querySelector('.duration-input')?.value || 'Non spécifiée',
+            description: box.querySelector('textarea')?.value || 'Aucune description',
         };
     });
 
@@ -46,8 +47,8 @@ function downloadJSON() {
     const storyboardData = {
         title: title,
         subtitle: subtitle,
+        plans: storyboardPlans,
         totalDuration: totalDuration,
-        plans: storyboardPlans
     };
 
     // Générer le fichier JSON
@@ -85,25 +86,25 @@ function generatePDF() {
     const boxes = document.querySelectorAll('.storyboard-box');
     boxes.forEach((box, index) => {
         const boxTitle = box.querySelector('.box-title input').value || `Plan ${index + 1}`;
-        const duration = box.querySelector('.duration-input')?.value || 'Non spécifiée';
-        const description = box.querySelector('textarea')?.value || 'Aucune description';
+        const tags = box.querySelector('#tagSelect')?.value || 'Aucun tag';
         const shotType = box.querySelector('.shot-type')?.value || 'Non spécifié';
         const cameraType = box.querySelector('.camera-type')?.value || 'Non spécifié';
-        const tags = box.querySelector('#tagSelect')?.value || 'Aucun tag';
         const focal = box.querySelector('.focal-input')?.value || 'Non spécifié';
         const videoReference = box.querySelector('.video-reference-container')?.textContent || 'Aucune vidéo';
+        const description = box.querySelector('textarea')?.value || 'Aucune description';
+        const duration = box.querySelector('.duration-input')?.value || 'Non spécifiée';
 
         // Ajouter les informations de chaque plan au PDF
         doc.setFontSize(12);
         doc.text(`Plan ${index + 1}`, 10, y);
         doc.text(`Titre : ${boxTitle}`, 10, y + 10);
-        doc.text(`Durée : ${duration} secondes`, 10, y + 20);
-        doc.text(`Description : ${description}`, 10, y + 30);
+        doc.text(`Tags : ${tags}`, 10, y + 60);
         doc.text(`Type de plan : ${shotType}`, 10, y + 40);
         doc.text(`Type de caméra : ${cameraType}`, 10, y + 50);
-        doc.text(`Tags : ${tags}`, 10, y + 60);
         doc.text(`Focale : ${focal} mm`, 10, y + 70);
         doc.text(`Vidéo de référence : ${videoReference}`, 10, y + 80);
+        doc.text(`Description : ${description}`, 10, y + 30);
+        doc.text(`Durée : ${duration} secondes`, 10, y + 20);
 
         y += 100; // Ajouter un espace pour le prochain plan
 
