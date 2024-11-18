@@ -282,7 +282,6 @@
      position: relative;
      border: 1px solid rgba(255, 255, 255, 0.3);
      transition: transform 0.3s ease, box-shadow 0.3s ease;
-     /* Animation pour l'effet */
  }
 
  .storyboard-box:hover {
@@ -407,9 +406,6 @@
      transition: opacity 0.5s;
  }
 
- /*  FONCTION SUPLEMENTAIRE  */
-
-
 
  .duration-container {
      margin-top: 10px;
@@ -466,6 +462,40 @@
      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
      /* Ombre douce pour ressortir */
  }
+
+
+ /* ⥥ ---------- ICONE URL NOUVEL ONGLET ---------- ⥥ */
+
+ /* L'input de l'URL */
+input[type="url"] {
+    width: 100%; /* L'input prend toute la largeur disponible */
+    padding-right: 30px; /* Ajoute un peu d'espace à droite pour l'icône */
+}
+
+/* L'icône à droite */
+.open-link-icon {
+    position: absolute;
+    bottom: 40px;
+    right: 10px; /* Place l'icône à 10px du bord droit */
+    cursor: pointer;
+    font-size: 18px; /* Ajuste la taille de l'icône */
+    color: #77aac0; /* Couleur de l'icône */
+}
+
+/* Changer la couleur au survol de l'icône */
+.open-link-icon:hover {
+    color: #ffffff;
+    transform: scale(1.09);
+}
+
+
+
+
+
+
+
+
+
 
  /* ⥥ ---------- SCROLL BAR ---------- ⥥ */
 

@@ -209,12 +209,23 @@ function addStoryboardBox() {
         <textarea placeholder="Description..."></textarea>
 
 
+
+
 <!-- ----------⥥ VIDEO REFERENCE (YouTube, Vimeo, etc.) ⥥---------- -->
 
+<!-- ----------⥥ VIDEO REFERENCE (YouTube, Vimeo, etc.) ⥥---------- -->
 <input type="url" placeholder="URL de la vidéo de référence" onchange="updateReferenceVideo(this)">
 <div class="video-reference-container">
     <!-- Le lien sera affiché ici une fois qu'il sera ajouté -->
+
 </div>
+
+    <!-- Icône pour ouvrir le lien dans un nouvel onglet -->
+<i class="fas fa-external-link-alt open-link-icon" onclick="openLinkInNewTab(this)" aria-hidden="true"></i>
+
+
+
+
 
 <!-- ----------⥥ MOVE CONTROL DEPLACEMENT ⥥---------- -->
 
@@ -224,22 +235,6 @@ function addStoryboardBox() {
         </div>
     `;
 
-        // Ajouter le bouton de duplication
-        const duplicateButton = box.querySelector('.duplicate-box');
-        if (duplicateButton) {
-            duplicateButton.addEventListener('click', function() {
-                duplicateBox(this);
-            });
-        }
-
-            // Ajouter le bouton de suppression
-    const deleteButton = box.querySelector('button');
-    if (deleteButton) {
-        deleteButton.addEventListener('click', function() {
-            deleteBox(this);
-        });
-    }
-
     container.appendChild(box);
     boxCounter++;
 }
@@ -247,7 +242,8 @@ function addStoryboardBox() {
 
 
 
-// ----------⥥ FONCTION SUPPRIMER TOUT ⥥----------
+// ----------⥥ BOUTON SUPPRIMER TOUT ⥥----------
+
 // Fonction pour supprimer toutes les cases du storyboard
 function deleteAllBoxes() {
     const container = document.getElementById('storyboardContainer');
@@ -263,6 +259,85 @@ function deleteAllBoxes() {
 
     // Recalculer la durée totale après suppression
     calculateTotalDuration();
+}
+
+// ----------⥥ BOXES FONCTIONS ⥥----------
+
+/* ⥥  AJOUTER PLAN ⥥ */
+function updateBoxTitle(input) {
+    const boxTitle = input.closest('.storyboard-box').querySelector('.box-title input');
+    boxTitle.value = input.value;
+}
+
+/* ⥥  DEPLACE BOXE ⥥ */
+function moveBox(button, direction) {
+    const box = button.closest('.storyboard-box');
+    const container = document.getElementById('storyboardContainer');
+    const boxes = Array.from(container.children);
+    const currentIndex = boxes.indexOf(box);
+    const newIndex = currentIndex + direction;
+
+    if (newIndex >= 0 && newIndex < boxes.length) {
+        container.insertBefore(box, boxes[newIndex]);
+    }
+}
+
+/* ⥥  SUPPRIME BOX ⥥ */
+function deleteBox(button) {
+    const box = button.closest('.storyboard-box');
+    box.classList.add('fade-out');
+    setTimeout(() => {
+        box.remove();
+        calculateTotalDuration(); // Recalcule la durée totale après suppression
+    }, 500);
+}
+
+/* ⥥  DUPLIQUER BOX ⥥ */
+function duplicateBox(button) {
+    const box = button.closest('.storyboard-box'); // Trouve la case parente
+    const container = document.getElementById('storyboardContainer'); // Trouve le conteneur des cases
+
+    // Créer une nouvelle case identique
+    const newBox = box.cloneNode(true); // cloneNode(true) pour cloner tous les éléments enfants
+
+    // Incrémenter le compteur de cases pour donner un titre unique à la nouvelle case
+    const newTitleInput = newBox.querySelector('input[type="text"]');
+    newTitleInput.value = getUniqueTitle(newTitleInput.value);
+
+    // Réinitialiser les champs si nécessaire (par exemple, effacer l'URL de l'image, etc.)
+    const newImageInput = newBox.querySelector('input[type="file"]');
+    newImageInput.value = ''; // Réinitialise le champ d'image
+
+    const newDescriptionTextarea = newBox.querySelector('textarea');
+    newDescriptionTextarea.value = ''; // Réinitialise la description
+
+    // Ajouter la nouvelle case au conteneur
+    container.appendChild(newBox);
+    boxCounter++; // Incrémenter le compteur pour le titre unique
+}
+
+// ----------⥥ IMAGE INPUT ⥥----------
+
+function handleImageUpload(input) {
+    const file = input.files[0];
+    if (file) {
+        const img = input.closest('.storyboard-box').querySelector('img');
+        img.src = URL.createObjectURL(file);
+        img.style.display = 'block';
+    }
+}
+
+// ----------⥥ IMAGES URL ⥥----------
+
+function handleImageURL(input) {
+    const url = input.value;
+    const img = input.closest('.storyboard-box').querySelector('img');
+    img.onerror = () => {
+        alert("Impossible de charger l'image. Vérifiez l'URL.");
+        img.style.display = 'none';
+    };
+    img.src = url;
+    img.style.display = 'block';
 }
 
 
@@ -338,82 +413,20 @@ function setFocalColor(element, color) {
     }
 }
 
-// ----------⥥ IMAGE INPUT ⥥----------
 
-function handleImageUpload(input) {
-    const file = input.files[0];
-    if (file) {
-        const img = input.closest('.storyboard-box').querySelector('img');
-        img.src = URL.createObjectURL(file);
-        img.style.display = 'block';
+// ----------⥥ OUVRE LIEN DE REFERENCE ⥥----------
+
+// Fonction pour ouvrir le lien dans un nouvel onglet
+function openLinkInNewTab(icon) {
+    // Trouver l'input URL dans la même case
+    const urlInput = icon.closest('.storyboard-box').querySelector('input[type="url"]');
+    const url = urlInput.value;
+
+    // Vérifier que l'URL est valide avant d'ouvrir le lien
+    if (url) {
+        window.open(url, '_blank'); // Ouvre l'URL dans un nouvel onglet
+    } else {
+        alert("Veuillez entrer un lien valide.");
     }
 }
-
-// ----------⥥ IMAGES URL ⥥----------
-
-function handleImageURL(input) {
-    const url = input.value;
-    const img = input.closest('.storyboard-box').querySelector('img');
-    img.onerror = () => {
-        alert("Impossible de charger l'image. Vérifiez l'URL.");
-        img.style.display = 'none';
-    };
-    img.src = url;
-    img.style.display = 'block';
-}
-
-// ----------⥥ BOXES FONCTIONS ⥥----------
-
-function updateBoxTitle(input) {
-    const boxTitle = input.closest('.storyboard-box').querySelector('.box-title input');
-    boxTitle.value = input.value;
-}
-
-function moveBox(button, direction) {
-    const box = button.closest('.storyboard-box');
-    const container = document.getElementById('storyboardContainer');
-    const boxes = Array.from(container.children);
-    const currentIndex = boxes.indexOf(box);
-    const newIndex = currentIndex + direction;
-
-    if (newIndex >= 0 && newIndex < boxes.length) {
-        container.insertBefore(box, boxes[newIndex]);
-    }
-}
-
-/* ⥥  DELETE BOX ⥥ */
-function deleteBox(button) {
-    const box = button.closest('.storyboard-box');
-    box.classList.add('fade-out');
-    setTimeout(() => {
-        box.remove();
-        calculateTotalDuration(); // Recalcule la durée totale après suppression
-    }, 500);
-}
-
-/* ⥥  DUPLICATION BOX ⥥ */
-function duplicateBox(button) {
-    const box = button.closest('.storyboard-box'); // Trouve la case parente
-    const container = document.getElementById('storyboardContainer'); // Trouve le conteneur des cases
-
-    // Créer une nouvelle case identique
-    const newBox = box.cloneNode(true); // cloneNode(true) pour cloner tous les éléments enfants
-
-    // Incrémenter le compteur de cases pour donner un titre unique à la nouvelle case
-    const newTitleInput = newBox.querySelector('input[type="text"]');
-    newTitleInput.value = getUniqueTitle(newTitleInput.value);
-
-    // Réinitialiser les champs si nécessaire (par exemple, effacer l'URL de l'image, etc.)
-    const newImageInput = newBox.querySelector('input[type="file"]');
-    newImageInput.value = ''; // Réinitialise le champ d'image
-
-    const newDescriptionTextarea = newBox.querySelector('textarea');
-    newDescriptionTextarea.value = ''; // Réinitialise la description
-
-    // Ajouter la nouvelle case au conteneur
-    container.appendChild(newBox);
-    boxCounter++; // Incrémenter le compteur pour le titre unique
-}
-
-
 
