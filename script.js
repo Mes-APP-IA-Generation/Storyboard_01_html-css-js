@@ -224,6 +224,22 @@ function addStoryboardBox() {
         </div>
     `;
 
+        // Ajouter le bouton de duplication
+        const duplicateButton = box.querySelector('.duplicate-box');
+        if (duplicateButton) {
+            duplicateButton.addEventListener('click', function() {
+                duplicateBox(this);
+            });
+        }
+
+            // Ajouter le bouton de suppression
+    const deleteButton = box.querySelector('button');
+    if (deleteButton) {
+        deleteButton.addEventListener('click', function() {
+            deleteBox(this);
+        });
+    }
+
     container.appendChild(box);
     boxCounter++;
 }
@@ -252,20 +268,6 @@ function deleteAllBoxes() {
 
 
 // ----------⥥ FONCTION DUREE DES PLANS ⥥----------
-
-function updateDuration(input) {
-    const duration = input.value; // Récupérer la valeur entrée par l'utilisateur
-    const box = input.closest('.storyboard-box'); // Trouver la box associée
-
-    // Créer ou mettre à jour l'affichage de la durée
-    let durationDisplay = box.querySelector('.duration-display');
-    if (!durationDisplay) {
-        durationDisplay = document.createElement('div');
-        durationDisplay.className = 'duration-display';
-        box.appendChild(durationDisplay);
-    }
-    durationDisplay.textContent = `Durée: ${duration} sec`; // Afficher la durée
-}
 
 // Fonction pour calculer et mettre à jour la durée totale
 function calculateTotalDuration() {

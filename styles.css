@@ -4,7 +4,7 @@
 
  /* ROOT  */
  :root {
-     --background-color: radial-gradient(ellipse at center, #0d0d0f 0%,#080a14 99%);
+     --background-color: radial-gradient(ellipse at center, #0d0d0f 0%, #080a14 99%);
      --box-background: #080a1400;
      --background-menu-select: #1618257c;
      --add-button: #7121bb;
@@ -13,7 +13,6 @@
      --scroll-bar-front: #664e7d;
      --scroll-bar-bk: #312e3e;
      --scroll-bar-largeur: 13px;
-     --scroll-bar-border: 3px;
      --scroll-bar-border: 3px;
 
 
@@ -90,37 +89,37 @@
  }
 
 
-  /* ICONES DE SAUVEGARDE DE STORYBOARD" */
+ /* ICONES DE SAUVEGARDE DE STORYBOARD" */
 
-  .custom-icon {
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
-}
+ .custom-icon {
+     width: 30px;
+     height: 30px;
+     vertical-align: middle;
+ }
 
 
  .save-share-icons {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 1px;
-    z-index: 1000;
-}
+     position: fixed;
+     top: 10px;
+     right: 10px;
+     display: flex;
+     gap: 1px;
+     z-index: 1000;
+ }
 
-.icon-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: white;
-    transition: transform 0.3s, color 0.3s;
-}
+ .icon-btn {
+     background: transparent;
+     border: none;
+     cursor: pointer;
+     font-size: 24px;
+     color: white;
+     transition: transform 0.3s, color 0.3s;
+ }
 
-.icon-btn:hover {
-    color: #FFCA3A; 
-    transform: scale(1.1); 
-}
+ .icon-btn:hover {
+     color: #FFCA3A;
+     transform: scale(1.1);
+ }
 
 
  /* COULEUR LOGO */
@@ -250,9 +249,8 @@
      border-radius: 5px;
      color: white;
      cursor: pointer;
-     transition: opacity 0.3s;
      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-     transition: background-color 0.5s ease-in-out, transform 0.1s ease-in-out;
+     transition: opacity 0.3s, transform 0.3s, background-color 0.5s ease-in-out;
      /* Transition plus longue et plus douce */
  }
 
