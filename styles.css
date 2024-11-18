@@ -4,8 +4,9 @@
 
  /* ROOT  */
  :root {
-     --background-color: #080a14;
-     --box-background: #080a147c;
+     --background-color: radial-gradient(ellipse at center, #0d0d0f 0%,#080a14 99%);
+     --box-background: #080a1400;
+     --background-menu-select: #1618257c;
      --add-button: #7121bb;
      --text-color: #ffffff;
      /* ⥥ ---------- ROOT SCROLL BAR ---------- ⥥ */
@@ -13,6 +14,9 @@
      --scroll-bar-bk: #312e3e;
      --scroll-bar-largeur: 13px;
      --scroll-bar-border: 3px;
+     --scroll-bar-border: 3px;
+
+
  }
 
  /* ⥥ ---------- CSS ---------- ⥥ */
@@ -24,7 +28,7 @@
  }
 
  body {
-     background-color: var(--background-color);
+     background: var(--background-color);
      color: var(--text-color);
      padding: 20px;
      position: relative;
@@ -46,23 +50,23 @@
  body::before {
      content: "";
      position: absolute;
-     top: 63%;
+     top: 80%;
      /* Centré verticalement */
      left: 50%;
      /* Centré horizontalement */
      transform: translate(-50%, -50%);
      /* Centrage parfait */
-     background-image: url('/image/logo-bg.png');
+     background-image: url('/image/Logozep0106.png');
      /* Remplace par le chemin de ton logo */
      background-repeat: no-repeat;
      /* Empêche le logo de se répéter */
      background-size: contain;
      /* Ajuste la taille pour qu'elle s'adapte sans déformation */
-     width: 500px;
+     width: 1500px;
      /* Taille du logo */
-     height: 500px;
+     height: 1500px;
      /* Taille du logo */
-     opacity: 0.03;
+     opacity: 0.2;
      pointer-events: none;
      /* Empêche toute interaction avec l'image du logo */
 
@@ -84,6 +88,40 @@
      /* Espacement entre le texte et le logo */
      text-align: center;
  }
+
+
+  /* ICONES DE SAUVEGARDE DE STORYBOARD" */
+
+  .custom-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+
+ .save-share-icons {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 1px;
+    z-index: 1000;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.icon-btn:hover {
+    color: #FFCA3A; 
+    transform: scale(1.1); 
+}
+
 
  /* COULEUR LOGO */
  .logo path {
@@ -296,7 +334,7 @@
 
  select,
  input[type="text"] {
-     background: rgba(255, 255, 255, 0.1);
+     background: var(--background-menu-select);
      border: 1px solid rgba(255, 255, 255, 0.2);
      padding: 5px;
      color: white;
@@ -305,7 +343,7 @@
  }
 
  select:focus {
-     background: #444;
+     background: var(--background-menu-select);
      /* Change ici la couleur de fond lorsque le menu est ouvert */
      border-color: #8538CB;
      /* Tu peux aussi changer la couleur de la bordure pour un effet plus visible */
@@ -314,7 +352,7 @@
  textarea {
      width: 100%;
      min-height: 100px;
-     background: rgba(255, 255, 255, 0.1);
+     background: var(--background-menu-select);
      border: 2px solid rgba(255, 255, 255, 0.2);
      color: white;
      padding: 8px;
@@ -387,7 +425,7 @@
  }
 
  .duration-container input {
-     background: rgba(255, 255, 255, 0.1);
+     background: var(--background-menu-select);
      border: 1px solid rgba(255, 255, 255, 0.2);
      padding: 10px;
      color: white;

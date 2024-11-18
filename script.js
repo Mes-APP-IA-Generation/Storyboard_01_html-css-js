@@ -15,6 +15,109 @@ function getUniqueTitle(baseTitle) {
     }
     return title;
 }
+// ⥥ ---------- FONCTION DE SAUVEGARDE  ---------- ⥥ 
+
+// ⥥  FONCTION DE SAUVEGARDE JSON  ⥥ 
+// ⥥ ---------- ! A OUVRIR ! ---------- ⥥ 
+function downloadJSON() {
+    // Récupérer le titre principal
+    const title = document.querySelector('h1').textContent || 'Storyboard';
+    const subtitle = document.querySelector('#storyboardSubtitle').value || '';
+    const totalDuration = document.querySelector('#totalDuration').textContent || '';
+
+    // Récupérer les informations des plans
+    const boxes = document.querySelectorAll('.storyboard-box');
+    const storyboardPlans = Array.from(boxes).map((box, index) => {
+        return {
+            planNumber: index + 1,
+            title: box.querySelector('.box-title input').value || `Plan ${index + 1}`,
+            duration: box.querySelector('.duration-input')?.value || 'Non spécifiée',
+            description: box.querySelector('textarea')?.value || 'Aucune description',
+            shotType: box.querySelector('.shot-type')?.value || 'Non spécifié',
+            cameraType: box.querySelector('.camera-type')?.value || 'Non spécifié',
+            tags: box.querySelector('#tagSelect')?.value || 'Aucun tag',
+            focal: box.querySelector('.focal-input')?.value || 'Non spécifié',
+            videoReference: box.querySelector('.video-reference-container')?.textContent || 'Aucune vidéo',
+            imageURL: box.querySelector('.image-container img')?.src || 'Aucune image'
+        };
+    });
+
+    // Construire la structure JSON
+    const storyboardData = {
+        title: title,
+        subtitle: subtitle,
+        totalDuration: totalDuration,
+        plans: storyboardPlans
+    };
+
+    // Générer le fichier JSON
+    const blob = new Blob([JSON.stringify(storyboardData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'storyboard.json';
+    link.click();
+    URL.revokeObjectURL(url); // Nettoyer l'URL après téléchargement
+}
+
+// ⥥ FONCTION DE SAUVEGARDE PDF  ⥥ 
+// ⥥ ---------- ! A OUVRIR ! ---------- ⥥ 
+function generatePDF() {
+    const doc = new jsPDF(); // Initialise un document PDF
+
+    // Récupérer le titre principal
+    const title = document.querySelector('h1').textContent || 'Storyboard';
+    const subtitle = document.querySelector('#storyboardSubtitle').value || '';
+
+    // Récupérer la durée totale
+    const totalDuration = document.querySelector('#totalDuration').textContent || '';
+
+    // Ajouter le titre principal et la durée totale au PDF
+    doc.setFontSize(16);
+    doc.text(title, 10, 10); // Ajouter le titre principal
+    doc.setFontSize(12);
+    doc.text(`Sous-titre : ${subtitle}`, 10, 20);
+    doc.text(totalDuration, 10, 30); // Ajouter la durée totale
+
+    let y = 40; // Position initiale pour les plans
+
+    // Récupérer les informations de chaque plan
+    const boxes = document.querySelectorAll('.storyboard-box');
+    boxes.forEach((box, index) => {
+        const boxTitle = box.querySelector('.box-title input').value || `Plan ${index + 1}`;
+        const duration = box.querySelector('.duration-input')?.value || 'Non spécifiée';
+        const description = box.querySelector('textarea')?.value || 'Aucune description';
+        const shotType = box.querySelector('.shot-type')?.value || 'Non spécifié';
+        const cameraType = box.querySelector('.camera-type')?.value || 'Non spécifié';
+        const tags = box.querySelector('#tagSelect')?.value || 'Aucun tag';
+        const focal = box.querySelector('.focal-input')?.value || 'Non spécifié';
+        const videoReference = box.querySelector('.video-reference-container')?.textContent || 'Aucune vidéo';
+
+        // Ajouter les informations de chaque plan au PDF
+        doc.setFontSize(12);
+        doc.text(`Plan ${index + 1}`, 10, y);
+        doc.text(`Titre : ${boxTitle}`, 10, y + 10);
+        doc.text(`Durée : ${duration} secondes`, 10, y + 20);
+        doc.text(`Description : ${description}`, 10, y + 30);
+        doc.text(`Type de plan : ${shotType}`, 10, y + 40);
+        doc.text(`Type de caméra : ${cameraType}`, 10, y + 50);
+        doc.text(`Tags : ${tags}`, 10, y + 60);
+        doc.text(`Focale : ${focal} mm`, 10, y + 70);
+        doc.text(`Vidéo de référence : ${videoReference}`, 10, y + 80);
+
+        y += 100; // Ajouter un espace pour le prochain plan
+
+        // Si on dépasse la page, créer une nouvelle page
+        if (y > 270) {
+            doc.addPage();
+            y = 10; // Réinitialiser la position pour la nouvelle page
+        }
+    });
+
+    // Télécharger le fichier PDF
+    doc.save('storyboard.pdf');
+}
+
 
 // ⥥ ---------- ! A OUVRIR ! ---------- ⥥ 
 function addStoryboardBox() {
